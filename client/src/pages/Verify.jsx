@@ -99,7 +99,7 @@ export default function Verify() {
                 <img
                   src={data.photoUrl}
                   alt={data.name}
-                  className="w-20 h-20 rounded-full object-cover border-2 border-gray-300 shadow"
+                  className="w-20 h-20 rounded-full object-cover object-top border-2 border-gray-300 shadow"
                   onError={(e) => {
                     // fallback to initials if photo fails to load
                     e.target.style.display = 'none'

@@ -140,7 +140,7 @@ export function CertificateCard({ data, loading, error }) {
           <>
             {/* University logo header */}
             <div className="flex justify-center mb-11">
-              <img src={logo} alt="Lords University" className="h-16 w-auto object-contain" />
+              <img src={logo} alt="Lords University" className="h-14 w-auto object-contain" />
             </div>
 
             {/* University name + address + title */}
@@ -161,7 +161,7 @@ export function CertificateCard({ data, loading, error }) {
                 <img
                   src={data.photoUrl}
                   alt={data.name}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-gray-200 shadow"
+                  className="w-16 h-16 rounded-full object-cover object-top border-2 border-gray-200 shadow"
                   onError={(e) => {
                     e.target.style.display = 'none'
                     e.target.nextSibling.style.display = 'flex'
