@@ -1,0 +1,12 @@
+{
+  "name": "digital-locker",
+  "version": "1.0.0",
+  "description": "Lords University Personal Digital Locker",
+  "scripts": {
+    "install:all": "cd client && npm install && cd ../server && npm install",
+    "seed": "cd server && npm run seed",
+    "server": "cd server && node server.js",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently \"cd server && node server.js\" \"cd client && npm run dev\""
+  }
+}
