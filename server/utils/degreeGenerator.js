@@ -28,7 +28,7 @@ const darkRed = '#3F0606'
 const gold    = '#C8A400'
 const goldDk  = '#8B6914'
 const black   = '#111111'
-const cream   = '#FEFCF5'
+const cream   = '#FFFFFF'
 const white   = '#FFFFFF'
 
 // ── Realistic barcode — stretched to a target width, thin height, deep black ──
@@ -127,7 +127,7 @@ async function buildDegreePDF(student, qrToken) {
     const certH  = H - outerM * 2
 
     const stripX = certX + 9   // sits on inner border
-    const stripW = 13
+    const stripW = 10
 
     const cx  = stripX + stripW + 10   // content left
     const cxR = certX + certW - 22     // content right (22px from right border)
@@ -154,7 +154,7 @@ async function buildDegreePDF(student, qrToken) {
        .lineWidth(1.4).strokeColor('#AAAAAA').stroke()
 
     // ── 4. Left strip — 16 boxes vertically centered, on inner border ─────────
-    const boxH        = 22
+    const boxH        = 18
     const totalStripH = 16 * boxH + 15 * 1
     const stripStartY = certY + (certH - totalStripH) / 2 + 12  // nudged down so it starts around "This is to certify that"
 
@@ -168,7 +168,7 @@ async function buildDegreePDF(student, qrToken) {
       const bcy = by + boxH / 2
       doc.save()
       doc.rotate(-90, { origin: [bcx, bcy] })
-      doc.fontSize(6).fillColor(isMar ? '#E8C84A' : '#FFFFFF').font('Helvetica-Bold')
+      doc.fontSize(6.5).fillColor('#FFFFFF').font('Helvetica-Bold')
       doc.text('LU', bcx - boxH / 2, bcy - 3, { width: boxH, align: 'center', lineBreak: false })
       doc.restore()
     }
