@@ -9,7 +9,7 @@ import {
   Award, RotateCcw, ClipboardList, Info, ExternalLink, Headphones
 } from 'lucide-react'
 import logo from '../assets/logo.png'
-import userPhoto from '../assets/newuserdp.jpeg'
+import userPhoto from '../assets/newimg2.jpeg'
 
 const authGet = (path) => {
   const token = localStorage.getItem('token')

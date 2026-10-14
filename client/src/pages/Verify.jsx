@@ -36,7 +36,7 @@ export default function Verify() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-8">
+      <div className="bg-white rounded-2xl shadow-lg w-full max-w-2xl p-12">
 
         {/* Loading */}
         {loading && (
@@ -63,15 +63,15 @@ export default function Verify() {
         {!loading && !error && data && (
           <>
             {/* University Header */}
-            <div className="text-center mb-5">
+            <div className="text-center mb-6">
               <h1
-                className="text-3xl font-black leading-tight tracking-widest"
+                className="text-5xl font-black leading-tight tracking-widest"
                 style={{ color: '#5C1A1A', fontFamily: 'Georgia, serif' }}
               >
                 LORDS
               </h1>
               <h2
-                className="text-xl font-bold tracking-widest"
+                className="text-3xl font-bold tracking-widest"
                 style={{ color: '#5C1A1A', fontFamily: 'Georgia, serif' }}
               >
                 UNIVERSITY
@@ -79,27 +79,27 @@ export default function Verify() {
             </div>
 
             {/* Divider */}
-            <div className="border-t border-gray-200 mb-5" />
+            <div className="border-t border-gray-200 mb-6" />
 
             {/* Subtitle */}
-            <div className="text-center mb-5">
-              <p className="text-gray-800 font-semibold text-sm">Lords University</p>
-              <p className="text-gray-500 text-xs mt-1 leading-relaxed">
+            <div className="text-center mb-10">
+              <p className="text-gray-800 font-normal text-5xl">Lords University</p>
+              <p className="text-gray-500 font-light text-3xl mt-6 leading-loose">
                 Alwar-Bhiwadi Highway, Chikani, Alwar,<br />
                 Rajasthan, India - 301028.
               </p>
-              <p className="text-red-500 font-semibold text-sm mt-4">
+              <p className="text-red-500 font-normal text-4xl mt-8 leading-relaxed">
                 Degree Certificate for QR Code Verification
               </p>
             </div>
 
             {/* Student Photo — large round, left-aligned like photo 4 */}
-            <div className="mb-6 pl-1">
+            <div className="mb-7 pl-1">
               {data.photoUrl ? (
                 <img
                   src={data.photoUrl}
                   alt={data.name}
-                  className="w-20 h-20 rounded-full object-cover object-top border-2 border-gray-300 shadow"
+                  className="w-40 h-40 rounded-full object-cover object-top border-2 border-gray-300 shadow"
                   onError={(e) => {
                     // fallback to initials if photo fails to load
                     e.target.style.display = 'none'
@@ -109,17 +109,17 @@ export default function Verify() {
               ) : null}
               {/* Fallback initials circle */}
               <div
-                className="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center border-2 border-gray-300 shadow"
+                className="w-40 h-40 rounded-full bg-blue-100 flex items-center justify-center border-2 border-gray-300 shadow"
                 style={{ display: data.photoUrl ? 'none' : 'flex' }}
               >
-                <span className="text-blue-600 font-bold text-2xl">
+                <span className="text-blue-600 font-bold text-5xl">
                   {data.name?.[0] || 'S'}
                 </span>
               </div>
             </div>
 
             {/* Details list — exactly like photo 4 */}
-            <div className="space-y-3 text-sm">
+            <div className="space-y-8 text-3xl">
               <DetailRow label="Name"            value={data.name}           isBlue />
               <DetailRow label="Registration Id" value={data.registrationId} />
               <DetailRow label="Programme"       value={data.programme}      />
@@ -129,8 +129,8 @@ export default function Verify() {
             </div>
 
             {/* Permission note */}
-            <div className="mt-6 pt-4 border-t border-gray-100">
-              <p className="text-xs text-gray-500 italic text-center leading-relaxed">
+            <div className="mt-10 pt-8 border-t border-gray-100">
+              <p className="text-2xl font-light text-gray-500 italic text-center leading-loose">
                 You don't have permission to view certificate,{' '}
                 <button
                   onClick={() => navigate('/login')}
@@ -150,9 +150,9 @@ export default function Verify() {
 
 function DetailRow({ label, value, isBlue }) {
   return (
-    <div className="flex gap-2">
-      <span className="font-bold text-gray-800 min-w-[130px] shrink-0">{label} :</span>
-      <span className={isBlue ? 'text-blue-600 font-medium' : 'text-gray-700'}>
+    <div className="flex gap-4">
+      <span className="font-medium text-gray-800 min-w-[260px] shrink-0">{label} :</span>
+      <span className={isBlue ? 'text-blue-600 font-normal' : 'text-gray-700 font-light'}>
         {value || '-'}
       </span>
     </div>

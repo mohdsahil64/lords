@@ -117,8 +117,8 @@ const shortProgramme = (p) => {
 
 export function CertificateCard({ data, loading, error }) {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-8">
+    <div className="min-h-screen bg-gray-100 flex justify-center p-4 overflow-y-auto">
+      <div className="bg-white rounded-2xl shadow-lg w-full max-w-md px-8 pt-4 pb-8 self-start">
 
         {loading && (
           <div className="flex flex-col items-center gap-4 py-12">
@@ -139,14 +139,14 @@ export function CertificateCard({ data, loading, error }) {
         {!loading && !error && data && (
           <>
             {/* University logo header */}
-            <div className="flex justify-center mb-11">
+            <div className="flex justify-center -mt-2 mb-14">
               <img src={logo} alt="Lords University" className="h-14 w-auto object-contain" />
             </div>
 
             {/* University name + address + title */}
             <div className="text-center mb-5">
-              <p className="text-gray-800 font-bold text-sm">Lords University</p>
-              <p className="text-gray-500 text-xs mt-1 leading-relaxed">
+              <p className="text-gray-800 font-normal text-lg">Lords University</p>
+              <p className="text-gray-500 text-sm mt-1 leading-relaxed">
                 Alwar-Bhiwadi Highway, Chikani, Alwar,<br />
                 Rajasthan, India - 301028.
               </p>
@@ -156,12 +156,13 @@ export function CertificateCard({ data, loading, error }) {
             </div>
 
             {/* Student photo — round, left aligned */}
-            <div className="mb-5 pl-1">
+            <div className="mb-5 -ml-2">
               {data.photoUrl ? (
                 <img
                   src={data.photoUrl}
                   alt={data.name}
-                  className="w-16 h-16 rounded-full object-cover object-top border-2 border-gray-200 shadow"
+                  className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
+                  style={{ objectPosition: 'center 25%' }}
                   onError={(e) => {
                     e.target.style.display = 'none'
                     e.target.nextSibling.style.display = 'flex'
@@ -169,17 +170,17 @@ export function CertificateCard({ data, loading, error }) {
                 />
               ) : null}
               <div
-                className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center border-2 border-gray-200 shadow"
+                className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center border-2 border-gray-200"
                 style={{ display: data.photoUrl ? 'none' : 'flex' }}
               >
-                <span className="text-blue-600 font-bold text-xl">
+                <span className="text-blue-600 font-bold text-3xl">
                   {data.name?.[0] || 'S'}
                 </span>
               </div>
             </div>
 
             {/* Details list */}
-            <div className="space-y-2 text-xs">
+            <div className="space-y-3 text-sm -ml-4">
               <DetailRow label="Name"            value={data.name}           isBlue />
               <DetailRow label="Registration Id" value={data.registrationId} />
               <DetailRow label="Programme"       value={shortProgramme(data.programme)} />
@@ -193,7 +194,7 @@ export function CertificateCard({ data, loading, error }) {
               <p className="text-xs text-gray-500 italic text-center leading-relaxed">
                 You don&apos;t have permission to view certificate,{' '}
                 <a
-                  href={loginUrl}
+                  href="https://lords.digiicampus.com/V2/#/home"
                   className="text-red-500 underline italic font-medium"
                 >
                   click here
@@ -211,10 +212,10 @@ export function CertificateCard({ data, loading, error }) {
 function DetailRow({ label, value, isBlue, nowrap }) {
   return (
     <div className="flex gap-2">
-      <span className="font-bold text-gray-800 min-w-[105px] shrink-0">{label} :</span>
+      <span className="font-medium text-gray-800 min-w-[115px] shrink-0">{label} :</span>
       <span
         className={[
-          isBlue ? 'text-blue-500 font-medium' : 'text-gray-700',
+          isBlue ? 'text-blue-500 font-normal' : 'text-gray-700 font-light',
           nowrap ? 'whitespace-nowrap' : '',
         ].join(' ')}
       >

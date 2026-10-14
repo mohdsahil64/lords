@@ -74,7 +74,7 @@ router.get('/cert-photo', async (req, res) => {
     if (!photoPath) return res.status(404).json({ message: 'Photo not found.' })
 
     res.setHeader('Content-Type', 'image/jpeg')
-    res.setHeader('Cache-Control', 'private, max-age=300')
+    res.setHeader('Cache-Control', 'no-store')
     res.sendFile(photoPath)
   } catch {
     res.status(401).json({ message: 'Invalid certificate id.' })
@@ -168,7 +168,7 @@ router.get('/photo/:regId', async (req, res) => {
     if (!photoPath) return res.status(404).json({ message: 'Photo not found.' })
 
     res.setHeader('Content-Type', 'image/jpeg')
-    res.setHeader('Cache-Control', 'private, max-age=300')
+    res.setHeader('Cache-Control', 'no-store')
     res.sendFile(photoPath)
   } catch {
     res.status(401).json({ message: 'Invalid token.' })
