@@ -17,6 +17,11 @@ const PORT = process.env.PORT || 5000
 app.use(helmet({
   crossOriginEmbedderPolicy: false,
   contentSecurityPolicy: false,
+  // Allow the frontend (different origin, e.g. lords.digiicampus.sbs) to load
+  // images/resources served by this API (api.digiicampus.sbs). Without this,
+  // Helmet's default CORP header blocks cross-origin <img> loads with
+  // ERR_BLOCKED_BY_RESPONSE.NotSameOrigin.
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
 }))
 
 // Allowed browser origins. Localhost (dev) is always allowed; add your
