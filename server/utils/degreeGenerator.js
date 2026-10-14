@@ -24,6 +24,9 @@ const SIGN = {
 const HINDI_LOGO = path.join(__dirname, '..', 'assets', 'lords-hindi.png')
 const HINDI_LOGO_RATIO = 882 / 136   // image pixel width / height
 
+// Back-of-degree full page image (added to server/assets as degree-back.jpeg)
+const BACK_IMAGE = path.join(__dirname, '..', 'assets', 'degree-back.jpeg')
+
 const darkRed = '#3F0606'
 const gold    = '#C8A400'
 const goldDk  = '#8B6914'
@@ -445,6 +448,22 @@ async function buildDegreePDF(student, qrToken) {
     doc.text('President', cxR - 58, presLabelY, { lineBreak: false })
 
     // ── 11. Simple bottom border (no gold/black strip) ────────────────────────
+
+    // ── 12. BACK PAGE — full back image, same size/ratio as the front cert ────
+    // The image fills the same area as the front certificate (page minus the
+    // outer margin), centered, preserving its aspect ratio.
+    doc.addPage({ size: 'A4', margin: 0 })
+    // White page background
+    doc.rect(0, 0, W, H).fill(white)
+    try {
+      // Fill the entire front-cert area (same size as the front page). The back
+      // image's aspect ratio (~908x1280) is nearly identical to the cert area,
+      // so filling introduces no visible distortion while making it full-size.
+      doc.image(BACK_IMAGE, certX, certY, {
+        width: certW,
+        height: certH,
+      })
+    } catch (e) { /* back image missing — skip */ }
 
     doc.end()
   })
