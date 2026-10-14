@@ -19,7 +19,17 @@ export default function Verify() {
       return
     }
     axios.get(`/api/verify/qr?token=${encodeURIComponent(token)}`)
-      .then(res => { setData(res.data); setLoading(false) })
+      .then(res => {
+        // Backend returns a relative photoUrl; an <img> tag ignores axios'
+        // baseURL, so prefix it with the API origin (VITE_API_URL) in prod.
+        const apiBase = import.meta.env.VITE_API_URL || ''
+        const payload = { ...res.data }
+        if (payload.photoUrl && payload.photoUrl.startsWith('/')) {
+          payload.photoUrl = `${apiBase}${payload.photoUrl}`
+        }
+        setData(payload)
+        setLoading(false)
+      })
       .catch(err => {
         setError(err.response?.data?.message || 'Invalid or expired QR code.')
         setLoading(false)
