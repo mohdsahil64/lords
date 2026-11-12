@@ -73,14 +73,14 @@ export default function PublicCertificate() {
       }
     }
 
-    axios.get(`/api/verify/cert?id=${encodeURIComponent(id)}`)
+    // VITE_API_URL is e.g. "https://api.digiicampus.sbs" in production.
+    // In dev it is empty and the Vite proxy forwards /api/* to localhost:5000.
+    const apiBase = import.meta.env.VITE_API_URL || ''
+    axios.get(`${apiBase}/api/verify/cert?id=${encodeURIComponent(id)}`)
       .then(res => {
         if (cancelled) return
         // The backend returns a relative photoUrl ("/api/verify/cert-photo?..").
-        // An <img> tag does NOT use axios' baseURL, so prefix it with the API
-        // origin (VITE_API_URL) in production; in dev it stays relative and the
-        // Vite proxy forwards it to localhost:5000.
-        const apiBase = import.meta.env.VITE_API_URL || ''
+        // Prefix it with apiBase so <img> loads from the correct origin.
         const payload = { ...res.data }
         if (payload.photoUrl && payload.photoUrl.startsWith('/')) {
           payload.photoUrl = `${apiBase}${payload.photoUrl}`
